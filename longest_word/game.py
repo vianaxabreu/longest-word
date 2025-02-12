@@ -3,6 +3,8 @@
 
 import string
 import random
+#challenge 3
+import requests
 
 
 class Game:
@@ -21,4 +23,12 @@ class Game:
                 letters.remove(letter)
             else:
                 return False
-        return True
+        # challenge 3
+        is_english = self.__check_dictionary(word)
+        return is_english
+
+    #challenge 3
+    def __check_dictionary(self, word):
+        response = requests.get(f"https://dictionary.lewagon.com/{word}")
+        json_response = response.json()
+        return json_response["found"]
